@@ -34,8 +34,8 @@ const Cart = ({ setIsModal }: CartProps) => {
 
   const cartActions = (
     <div className={styles.buttonsBottom}>
+      {products.length > 0 && <Button onClick={() => setIsOrder(true)} title='Order' />}
       <Button onClick={() => setIsModal(false)} title='Close' isTransparent={true} />
-      <Button onClick={() => setIsOrder(true)} title='Order' />
     </div>
   );
 

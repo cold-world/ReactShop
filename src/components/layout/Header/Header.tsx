@@ -13,7 +13,11 @@ const Header = ({ setIsModal }: HeaderProps) => {
   return (
     <header className={styles.header}>
       <h1>ReactShop</h1>
-      <button onClick={() => setIsModal((prev) => !prev)} className={styles.button}>
+      <button
+        disabled={products.length === 0 ? true : false}
+        onClick={() => setIsModal((prev) => !prev)}
+        className={styles.button}
+      >
         <span>
           <CartIcon />
         </span>

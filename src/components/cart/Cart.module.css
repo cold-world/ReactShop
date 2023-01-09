@@ -18,12 +18,11 @@
   }
 }
 
-
 .cart {
   background: white;
   z-index: 2;
   position: fixed;
-  top: 30vh;
+  top: 10vh;
   left: 25%;
   width: 50%;
   animation: 0.5s forwards ease-out cart-appears;

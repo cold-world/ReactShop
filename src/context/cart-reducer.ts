@@ -5,11 +5,12 @@ export interface ICartContext {
   totalAmount: number;
   addItem?: (product: Product) => void;
   removeItem?: (product: Product) => void;
+  cleanCard?: () => void;
 }
 
 interface Action {
-  payload: Product;
-  type: 'ADD' | 'REMOVE';
+  payload?: Product;
+  type: 'ADD' | 'REMOVE' | 'CLEAN';
 }
 
 const initialState: ICartContext = {
@@ -19,10 +20,10 @@ const initialState: ICartContext = {
 
 export const cartReducer = (state: ICartContext, action: Action) => {
   if (action.type === 'ADD') {
-    const updatedTotalAmount = state.totalAmount + action.payload.price * action.payload.amount;
+    const updatedTotalAmount = state.totalAmount + action.payload!.price * action.payload!.amount;
 
     const existingCartProductIndex = state.products.findIndex(
-      (item) => item.id === action.payload.id
+      (item) => item.id === action.payload!.id
     );
     const existingCartProduct = state.products[existingCartProductIndex];
 
@@ -31,12 +32,12 @@ export const cartReducer = (state: ICartContext, action: Action) => {
     if (existingCartProduct) {
       const updatedProduct = {
         ...existingCartProduct,
-        amount: existingCartProduct.amount + action.payload.amount,
+        amount: existingCartProduct.amount + action.payload!.amount,
       };
       updatedProducts = [...state.products];
       updatedProducts[existingCartProductIndex] = updatedProduct;
     } else {
-      updatedProducts = state.products.concat(action.payload);
+      updatedProducts = state.products.concat(action.payload!);
     }
 
     return {
@@ -45,13 +46,13 @@ export const cartReducer = (state: ICartContext, action: Action) => {
     };
   }
   if (action.type === 'REMOVE') {
-    const existingProductIndex = state.products.findIndex((item) => item.id === action.payload.id);
+    const existingProductIndex = state.products.findIndex((item) => item.id === action.payload!.id);
     const existingProduct = state.products[existingProductIndex];
     const updatedTotalAmount = state.totalAmount - existingProduct.price;
 
     let updatedProducts;
     if (existingProduct.amount === 1) {
-      updatedProducts = state.products.filter((item) => item.id !== action.payload.id);
+      updatedProducts = state.products.filter((item) => item.id !== action.payload!.id);
     } else {
       const updatedProduct = { ...existingProduct, amount: existingProduct.amount - 1 };
       updatedProducts = [...state.products];
@@ -62,6 +63,9 @@ export const cartReducer = (state: ICartContext, action: Action) => {
       products: updatedProducts,
       totalAmount: updatedTotalAmount,
     };
+  }
+  if (action.type === 'CLEAN') {
+    return initialState;
   }
 
   return initialState;

@@ -16,7 +16,7 @@ const CartForm = ({ closeModal, setIsSuccess }: CartFormProps) => {
   const emailInput = useInput();
   const addressInput = useInput();
 
-  const { products, totalAmount } = useContext(CartContext);
+  const { products, totalAmount, cleanCard } = useContext(CartContext);
 
   const [isError, setIsError] = useState<string | null>(null);
 
@@ -60,6 +60,7 @@ const CartForm = ({ closeModal, setIsSuccess }: CartFormProps) => {
     try {
       await sendRequest(config);
       setIsSuccess(true);
+      cleanCard!();
     } catch (error: any) {
       setIsError(error.message);
       return;
@@ -80,7 +81,7 @@ const CartForm = ({ closeModal, setIsSuccess }: CartFormProps) => {
           title='Cancel'
           isTransparent={true}
         />
-        <Button className={styles.button} title='Submit' />
+        <Button type='submit' className={styles.button} title='Submit' />
       </div>
     </form>
   );

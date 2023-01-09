@@ -28,11 +28,16 @@ const CartContextProvider = ({ children }: CartContextProviderProps): JSX.Elemen
     dispatchCartAction({ type: 'REMOVE', payload: product });
   };
 
+  const cleanAfterCheckout = () => {
+    dispatchCartAction({ type: 'CLEAN' });
+  };
+
   const cartContext: ICartContext = {
     products: cartState.products,
     totalAmount: cartState.totalAmount,
     addItem: addItemHandler,
     removeItem: removeItemHandler,
+    cleanCard: cleanAfterCheckout,
   };
 
   return <CartContext.Provider value={cartContext}>{children}</CartContext.Provider>;
