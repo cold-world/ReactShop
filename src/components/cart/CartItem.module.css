@@ -1,0 +1,12 @@
+.cartTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+}
+
+.buttonsTop {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}

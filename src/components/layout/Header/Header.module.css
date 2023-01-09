@@ -1,0 +1,27 @@
+.header {
+  background: linear-gradient(to right, #e66465, #9198e5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 10rem;
+  color: white;
+  font-size: large;
+}
+
+.button {
+  background: rgba(57, 14, 14, 0.6);
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  font-size: large;
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+
+.amount {
+  background: brown;
+  padding: 0.5rem 1rem;
+  border-radius: 40px;
+}
