@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import Card from '../../UI/Card/Card';
+import Card from '../../ui/Card/Card';
 import styles from './HomeCard.module.css';
 
 type Props = {};
